@@ -1,0 +1,169 @@
+@baseUrl = http://localhost:8000
+
+# ============================================
+# PRUEBAS CRUD MATERIA PRIMA
+# ============================================
+
+### 1. Obtener todas las materias primas (GET)
+GET {{baseUrl}}/materia-prima
+
+### 2. Crear nueva materia prima - Hilo rojo (POST)
+POST {{baseUrl}}/materia-prima
+Content-Type: application/json
+
+{
+  "Nombre_Prima": "Hilo Rojo",
+  "Descripcion_Prima": "Hilo de algodón color rojo para manualidades",
+  "Cantidad_Unitaria": 10.5,
+  "EsPaquete": false,
+  "EsTextil": true,
+  "Precio_Unitario": 15.50,
+  "Unidad_Medida": "Metros",
+  "Stock_Minimo": 5
+}
+
+### 3. Crear nueva materia prima - Papel crepe (POST)
+POST {{baseUrl}}/materia-prima
+Content-Type: application/json
+
+{
+  "Nombre_Prima": "Papel Crepe Azul",
+  "Descripcion_Prima": "Papel crepe azul para decoraciones",
+  "Cantidad_Unitaria": 25,
+  "EsPaquete": true,
+  "EsTextil": false,
+  "Precio_Unitario": 8.75,
+  "Unidad_Medida": "Pliegos",
+  "Stock_Minimo": 10
+}
+
+### 4. Crear nueva materia prima - Botones (POST)
+POST {{baseUrl}}/materia-prima
+Content-Type: application/json
+
+{
+  "Nombre_Prima": "Botones Multicolor",
+  "Descripcion_Prima": "Set de botones de diferentes colores",
+  "Cantidad_Unitaria": 50,
+  "EsPaquete": true,
+  "EsTextil": false,
+  "Precio_Unitario": 12.00,
+  "Unidad_Medida": "Unidad",
+  "Stock_Minimo": 20
+}
+
+### 5. Obtener materia prima por ID (GET)
+GET {{baseUrl}}/materia-prima/2
+
+### 6. Actualizar materia prima (PUT)
+PUT {{baseUrl}}/materia-prima/1
+Content-Type: application/json
+
+{
+  "Nombre_Prima": "Hilo Rojo Premium",
+  "Descripcion_Prima": "Hilo de algodón premium color rojo para manualidades finas",
+  "EsPaquete": false,
+  "EsTextil": true,
+  "Precio_Unitario": 18.50,
+  "Unidad_Medida": "Metros",
+  "Stock_Minimo": 8
+}
+
+### 7. Buscar materias primas por término (GET)
+GET {{baseUrl}}/materia-prima/buscar/hilo
+
+### 8. Obtener materias primas con stock bajo (GET)
+GET {{baseUrl}}/materia-prima/stock/bajo
+
+### 9. Crear materia prima con stock bajo para probar alertas (POST)
+POST {{baseUrl}}/materia-prima
+Content-Type: application/json
+
+{
+  "Nombre_Prima": "Pegamento Líquido",
+  "Descripcion_Prima": "Pegamento líquido transparente",
+  "Cantidad_Unitaria": 2,
+  "EsPaquete": false,
+  "EsTextil": false,
+  "Precio_Unitario": 5.25,
+  "Unidad_Medida": "Mililitros",
+  "Stock_Minimo": 5
+}
+
+### 10. Obtener todas las materias primas después de los cambios (GET)
+GET {{baseUrl}}/materia-prima
+
+### 11. Prueba de validación - Crear materia prima sin nombre (debe fallar)
+POST {{baseUrl}}/materia-prima
+Content-Type: application/json
+
+{
+  "Nombre_Prima": "",
+  "Descripcion_Prima": "Prueba sin nombre",
+  "Precio_Unitario": 10.00
+}
+
+### 12. Prueba de validación - Crear materia prima sin precio (debe fallar)
+POST {{baseUrl}}/materia-prima
+Content-Type: application/json
+
+{
+  "Nombre_Prima": "Prueba sin precio",
+  "Descripcion_Prima": "Prueba sin precio unitario"
+}
+
+### 13. Obtener materia prima que no existe (debe fallar)
+GET {{baseUrl}}/materia-prima/999
+
+### 14. Actualizar materia prima que no existe (debe fallar)
+PUT {{baseUrl}}/materia-prima/999
+Content-Type: application/json
+
+{
+  "Nombre_Prima": "No existe",
+  "Precio_Unitario": 10.00
+}
+
+### 15. Eliminar materia prima (DELETE) - ¡Cuidado, esto elimina permanentemente!
+# DELETE {{baseUrl}}/materia-prima/4
+# Descomenta la línea de arriba si quieres probar la eliminación
+
+### 16. Buscar materias primas con término que no existe
+GET {{baseUrl}}/materia-prima/buscar/noexiste
+
+### ============================================
+### PRUEBAS EXTRAS CON DATOS MÁS COMPLEJOS
+### ============================================
+
+### 17. Crear materia prima con caracteres especiales
+POST {{baseUrl}}/materia-prima
+Content-Type: application/json
+
+{
+  "Nombre_Prima": "Cinta Adhesiva 3M™",
+  "Descripcion_Prima": "Cinta adhesiva de doble cara marca 3M™ - resistente",
+  "Cantidad_Unitaria": 15.75,
+  "EsPaquete": false,
+  "EsTextil": false,
+  "Precio_Unitario": 22.99,
+  "Unidad_Medida": "Centímetros",
+  "Stock_Minimo": 3
+}
+
+### 18. Crear materia prima textil con medidas en cm
+POST {{baseUrl}}/materia-prima
+Content-Type: application/json
+
+{
+  "Nombre_Prima": "Tela de Algodón Estampada",
+  "Descripcion_Prima": "Tela de algodón 100% con estampado floral",
+  "Cantidad_Unitaria": 200,
+  "EsPaquete": false,
+  "EsTextil": true,
+  "Precio_Unitario": 35.00,
+  "Unidad_Medida": "Centímetros",
+  "Stock_Minimo": 50
+}
+
+### 19. Prueba de búsqueda por descripción
+GET {{baseUrl}}/materia-prima/buscar/algodón

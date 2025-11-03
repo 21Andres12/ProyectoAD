@@ -1,0 +1,1 @@
+# Archivo para hacer que Conexion sea un paquete de Python
